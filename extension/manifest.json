@@ -1,0 +1,16 @@
+{
+  "name": "RSL Interactive Guide",
+  "description": "Raid Shadow Legends hero and skill reference for streamers and viewers.",
+  "summary": "Interactive hero skill reference for Raid: Shadow Legends. Browse Legendary and Mythical champions, their skills, and effect cross-references.",
+  "version": "0.0.1",
+  "author": "",
+  "panel": {
+    "viewer_url": "panel/panel.html",
+    "height": 500
+  },
+  "config": {},
+  "bits": { "use_bits_callback": false },
+  "capabilities": [],
+  "whitelisted_config_urls": [],
+  "whitelisted_panel_urls": []
+}

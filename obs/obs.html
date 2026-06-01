@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RSL OBS Overlay</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <link rel="stylesheet" href="obs.css">
+</head>
+<body>
+  <!-- Control panel (top-left, hidden from stream via OBS crop) -->
+  <div id="control-panel" class="control-panel control-panel--hidden">
+    <div class="control-panel__header">
+      <span>RSL Hero Guide</span>
+      <button id="close-control" class="control-close">✕</button>
+    </div>
+    <div class="control-panel__duration">
+      <label for="obs-duration">Visible (sec):</label>
+      <input type="number" id="obs-duration" class="duration-input" value="8" min="1" max="120">
+      <label class="nolimit-label" title="Pin card — no auto-dismiss">
+        <input type="checkbox" id="obs-nolimit" checked> ∞
+      </label>
+    </div>
+    <div class="obs-tabs">
+      <button class="obs-tab obs-tab--active" id="obs-tab-heroes">Heroes</button>
+      <button class="obs-tab" id="obs-tab-effects">Effects</button>
+      <button class="obs-tab obs-tab--support" id="obs-tab-support" title="Support the author">♥</button>
+    </div>
+    <input type="text" id="obs-search-heroes" class="search-input" placeholder="Search heroes...">
+    <input type="text" id="obs-search-effects" class="search-input" placeholder="Search effects..." style="display:none">
+    <div id="obs-heroes-list" class="obs-heroes-list"></div>
+    <div id="obs-effects-list" class="obs-effects-list" style="display:none"></div>
+    <div id="obs-support" class="obs-support" style="display:none">
+      <div class="obs-support__title">Support the Author</div>
+      <div class="obs-support__hint">Click to copy link</div>
+      <div class="obs-support__links">
+        <button class="obs-support__link" data-copy="https://discord.com/invite/SMBETX9kK7">Discord</button>
+        <button class="obs-support__link" data-copy="https://www.twitch.tv/sunce_gaming">Twitch</button>
+        <button class="obs-support__link" data-copy="https://www.youtube.com/channel/UCI9hj6OOpQMCgE2owTDR9uA">YouTube</button>
+      </div>
+      <button class="obs-support__donate" data-copy="https://donatello.to/sun99">Donate / Subscribe ↗</button>
+      <div class="feedback-form">
+        <textarea class="feedback-input" placeholder="Bug report or feedback..." maxlength="500" rows="3"></textarea>
+        <div class="feedback-footer">
+          <span class="feedback-chars">0 / 500</span>
+          <button class="feedback-submit">Send</button>
+        </div>
+        <div class="feedback-status" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toggle button + lang flags (always visible top-left corner) -->
+  <div class="obs-top-bar">
+    <button id="toggle-control" class="toggle-btn" title="Toggle hero selector (C)">☰</button>
+    <div class="lang-toggle">
+      <button class="lang-btn" data-lang="en" title="English">EN</button>
+      <button class="lang-btn" data-lang="uk" title="Українська">UA</button>
+    </div>
+  </div>
+
+  <!-- Card overlay (bottom-right, visible on stream) -->
+  <div id="card-overlay" class="card-overlay card-overlay--hidden"></div>
+
+  <script type="module" src="obs.js?v=5"></script>
+</body>
+</html>

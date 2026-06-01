@@ -1,0 +1,140 @@
+// shared/effect-descriptions.js
+import { escapeHtml } from './utils.js';
+
+// Maps bracket text in skill descriptions → effect slug
+export const EFFECT_TEXT_TO_SLUG = {
+  'Continuous Heal':  'heal',
+  'Freeze':           'freeze',
+  'Sleep':            'sleep',
+  'Stun':             'stun',
+  'Provoke':          'provoke',
+  'Fear':             'fear',
+  'True Fear':        'true_fear',
+  'Weaken':           'weaken',
+  'Poison':           'poison',
+  'HP Burn':          'hp_burn',
+  'Burn':             'burn',
+  'Hex':              'hex',
+  'Bomb':             'bomb',
+  'Time Bomb':        'time_bomb',
+  'Leech':            'leech',
+  'Decrease DEF':     'decrease_def',
+  'Decrease ATK':     'decrease_atk',
+  'Decrease SPD':     'decrease_spd',
+  'Decrease C. Rate': 'decrease_cr',
+  'Decrease ACC':     'decrease_acc',
+  'Increase DEF':     'increase_def',
+  'Increase ATK':     'increase_atk',
+  'Increase SPD':     'speed_buff',
+  'Increase C. Rate': 'increase_cr',
+  'Increase C. DMG':  'increase_cd',
+  'Increase ACC':     'increase_acc',
+  'Shield':           'shield',
+  'Veil':             'veil',
+  'Unkillable':       'unkillable',
+  'Ally Protect':     'ally_protect',
+  'Counterattack':    'counterattack',
+  'Reflect Damage':   'reflect_damage',
+  'Block Buffs':      'block_buffs',
+  'Block Debuffs':    'block_debuffs',
+  'Block Damage':     'block_damage',
+  'Block Revive':          'block_revive',
+  'Necrosis':              'necrosis',
+  'Perfect Veil':          'perfect_veil',
+  'Decrease MAX HP':       'decrease_max_hp',
+  'Sheep':                 'sheep',
+  'Strengthen':            'strengthen',
+  'Increase RES':          'increase_res',
+  'Decrease RES':          'decrease_res',
+  'Increase C. DMG':       'increase_cd',
+  // New effects
+  'Taunt':                 'taunt',
+  'Revive on Death':       'revive_on_death',
+  'Block Active Skills':   'block_active_skills',
+  'Block Passive Skills':  'block_passive_skills',
+  'Heal Reduction':        'heal_reduction',
+  'Poison Sensitivity':    'poison_sensitivity',
+  'Decrease C. DMG':       'decrease_cd',
+};
+
+export const EFFECT_DESCRIPTIONS = {
+  revive:               'Restores HP and sometimes Turn Meter to a defeated ally. Allies killed under Block Revive cannot be revived unless the skill explicitly states otherwise.',
+  heal:                 'Heals champion at the start of their turn by 7.5% or 15% of their MAX HP. Multiple stacks each count as a separate heal.',
+  freeze:               'Frozen enemies cannot take their turn and take 75% of normal incoming damage. Removed when the target is hit.',
+  sleep:                'Sleeping enemies miss turns but wake when damaged. Skill cooldowns do not progress while asleep.',
+  stun:                 'Stunned enemies miss their turn and skill cooldowns do not progress. Stun sets bypass accuracy requirements.',
+  provoke:              'Provoked enemies can only use their A1 skill against the champion who placed the debuff, at 75% damage.',
+  fear:                 '50% chance target misses their turn. True Fear also causes the skill used to go on cooldown.',
+  true_fear:            'Target is guaranteed to miss their turn and the skill they used goes on cooldown. Stronger than Fear.',
+  weaken:               'Amplifies incoming damage to the target by 25% (or 15%). Does not affect Poison or HP Burn damage.',
+  poison:               'Deals 2.5% or 5% of target\'s MAX HP as damage per turn. Stacks accumulate independently; exploited by Poison detonator skills.',
+  hp_burn:              'Deals % MAX HP damage each time the target takes a turn. Capped at 50k (Rares) or 75k (Epics/Legendaries) per tick vs Clan Boss.',
+  burn:                 'Deals ATK-scaled damage to the target each turn.',
+  hex:                  'Single-target attacks deal 10% of HP removed as splash to all enemies; AoE attacks deal 2% splash. Damage to shields doesn\'t spread unless the shield is broken.',
+  bomb:                 'Deals damage based on caster\'s ATK when the timer expires. Cannot crit but ignores DEF.',
+  time_bomb:            'Explodes after 2 turns, dealing damage scaled to target\'s MAX HP.',
+  leech:                'Heals the placing champion for 18% of damage dealt to the target. Allows teams to skip Lifesteal gear on Clan Boss and Spider.',
+  decrease_def:         'Reduces target\'s DEF by 30% (minor) or 60% (major). DEF can mitigate up to 85% of damage — one of the most impactful debuffs.',
+  decrease_atk:         'Reduces target\'s ATK by 25% (minor) or 50% (major). Essential for Clan Boss and most difficult content.',
+  decrease_spd:         'Reduces target\'s SPD by 15% (minor) or 30% (major). Helps gain turn meter advantage, especially on boss encounters.',
+  decrease_cr:          'Reduces target\'s Critical Rate by 15% or 30%. Most PvE content has only 15% base Crit Rate, so this can eliminate critical hits entirely.',
+  decrease_acc:         'Reduces target\'s Accuracy by 25% or 50%, weakening their ability to land debuffs and instant effects.',
+  increase_def:         'Increases ally\'s DEF by 30% (minor) or 60% (major). Multiplies current in-battle value including aura bonuses.',
+  increase_atk:         'Increases ally\'s ATK by 25% (minor) or 50% (major). Multiplies current in-battle value including aura bonuses.',
+  speed_buff:           'Increases ally\'s SPD by 15% (minor) or 30% (major). Multiplies current in-battle value including aura bonuses.',
+  increase_cr:          'Increases ally\'s Critical Rate by 15% (minor) or 30% (major). Additive to current in-battle value.',
+  increase_cd:          'Increases ally\'s Critical DMG by 15% (minor) or 25% (major). Additive to current in-battle value.',
+  increase_acc:         'Increases ally\'s Accuracy by 25% (minor) or 50% (major). Multiplies current in-battle value including aura bonuses.',
+  shield:               'Provides a barrier of additional HP reduced before a champion takes damage. Artifact and skill shields are separate buffs but combine into one shield bar.',
+  veil:                 'Champion is untargetable by single-target skills and takes 7.5% or 15% less incoming damage. AoE skills still hit. Cannot be stolen.',
+  unkillable:           'Champion cannot take lethal damage — reduced to minimum 1 HP. Core strategy for Clan Boss teams.',
+  ally_protect:         'Caster takes 25% or 50% of damage inflicted on the protected target (calculated before buff multiplications). Poison does not trigger this effect.',
+  counterattack:        'When attacked, champion counter-attacks with their A1 skill at 25% reduced damage. Does not count as a turn.',
+  reflect_damage:       'Reflects 15% or 30% of incoming damage back to the attacker. Only received HP damage is reflected — shield absorption is excluded.',
+  block_buffs:          'Any buff placed on the target is blocked and has no effect. Does not block instant effects like Increase Turn Meter.',
+  block_debuffs:        'Target is immune to all incoming debuffs. Does not block instant effects such as Decrease Turn Meter.',
+  block_damage:         'Sets incoming damage to 0, making champion immune to all damage unless the skill ignores this effect.',
+  turn_meter_boost:     'Increases target\'s Turn Meter, causing them to take their turn sooner. Does not affect the champion\'s base speed.',
+  turn_meter_decrease:  'Decreases target\'s current Turn Meter by a set amount. Reduces current meter position only — does not affect speed.',
+  extend_buffs:         'Increases current duration of all buffs on target(s) by a set number of turns. Cannot extend Taunt, Unkillable, or Block Damage buffs.',
+  remove_buffs:         'Removes buffs from target(s). Protected buffs (yellow border) cannot be removed unless the skill explicitly states otherwise.',
+  remove_debuffs:       'Removes debuffs from target(s). Protected debuffs (yellow border) cannot be removed unless the skill explicitly states otherwise.',
+  steal_buffs:          'Takes buffs from target(s) and places them on the caster. Stolen buffs retain their original duration. Not considered a buff removal effect.',
+  nuke:                 'Deals bonus damage equal to a percentage of the target\'s MAX HP.',
+  block_revive:         'Prevents the target from being revived. One of the few debuffs that requires no accuracy to activate.',
+  necrosis:             'Each stack increases all damage the target takes by 1%. Stacks up to 10 times.',
+  perfect_veil:         'Like Veil, but champion also cannot be hit by AoE skills. Stronger than regular Veil.',
+  decrease_max_hp:      'Reduces target\'s MAX HP based on damage dealt or skill effect. Weakens HP-based healing and HP-scaled damage abilities on the target.',
+  sheep:                'Transforms target into a sheep, preventing all actions. Removed when target takes damage.',
+  strengthen:           'Reduces incoming damage to the target by 15% or 25%. Applied multiplicatively after all other damage calculations.',
+  increase_res:         'Increases ally\'s Resistance by 25% or 50%. Multiplies current in-battle value including aura bonuses.',
+  decrease_res:         'Reduces target\'s Resistance. Higher-end content has ever-scaling Resistance values, making this debuff highly effective.',
+  // New effects
+  taunt:                'Forces all enemies to target this champion, but unlike Provoke they can use any skill. Bypasses Veil — enemies cannot ignore the taunting champion.',
+  revive_on_death:      'Upon receiving fatal damage the champion is instantly revived and the buff is consumed. Revived champion returns with 30% MAX HP and zero turn meter.',
+  block_active_skills:  'Prevents the target from using any active skill with a cooldown, forcing them to use only their A1 each turn. One of the strongest control debuffs.',
+  block_passive_skills: 'Prevents the target from benefiting from their passive abilities for the duration. Highly situational but game-changing against passive-dependent champions.',
+  heal_reduction:       'Reduces all healing received by the target by 50% or 100%. Primarily useful in Spirit Keep and Fire Knight.',
+  poison_sensitivity:   'Amplifies Poison damage dealt to the target by 25% (minor) or 50% (major). Multiplicative with Poison stacks — highly effective in Clan Boss and Dragon\'s Lair.',
+  decrease_cd:          'Reduces target\'s Critical Damage by 15% (minor) or 25–30% (major). Applied multiplicatively, reducing the total damage of critical hits.',
+  decrease_buff_duration: 'Reduces the remaining duration of all or some buffs on the target by a set number of turns. If a buff has fewer turns than the reduction it is removed entirely.',
+  increase_debuff_duration: 'Extends the remaining duration of debuffs on the target by a set number of turns. Cannot extend Hard CC debuffs such as Stun, Freeze, or Provoke.',
+  spread_debuff:        'Copies all or selected debuffs from one target and applies them to all enemies. Spread debuffs retain original duration and stats (e.g. Bomb multipliers).',
+  transfer_debuff:      'Moves one or more debuffs from the caster or allies onto the enemy target. Transferred debuffs retain their remaining duration. Requires Accuracy to land.',
+};
+
+// Replaces [Term] patterns in description with clickable buttons (if slug known)
+// or highlighted spans (unknown bracket terms).
+export function highlightDescription(description) {
+  return description.split(/(\[[^\]]+\])/).map(part => {
+    if (part.startsWith('[') && part.endsWith(']')) {
+      const term = part.slice(1, -1);
+      const slug = EFFECT_TEXT_TO_SLUG[term];
+      if (slug) {
+        return `<button class="effect-tag effect-tag--inline" data-effect="${slug}">${escapeHtml(part)}</button>`;
+      }
+      return `<span class="mechanic-tag">${escapeHtml(part)}</span>`;
+    }
+    return escapeHtml(part);
+  }).join('');
+}

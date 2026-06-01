@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RSL Guide</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <div class="panel">
+    <div class="tabs">
+      <button class="tab tab--active" id="tab-heroes">Heroes</button>
+      <button class="tab" id="tab-effects">Effects</button>
+      <button class="tab tab--support" id="tab-support" title="Support the author">♥</button>
+      <div class="lang-toggle">
+        <button class="lang-btn" data-lang="en" title="English">EN</button>
+        <button class="lang-btn" data-lang="uk" title="Українська">UA</button>
+      </div>
+    </div>
+    <div id="support-modal" class="support-modal support-modal--hidden">
+      <div class="support-modal__title">Support the Author</div>
+      <div class="support-links">
+        <a href="https://discord.com/invite/SMBETX9kK7" class="support-link" target="_blank">Discord</a>
+        <a href="https://www.twitch.tv/sunce_gaming" class="support-link" target="_blank">Twitch</a>
+        <a href="https://www.youtube.com/channel/UCI9hj6OOpQMCgE2owTDR9uA" class="support-link" target="_blank">YouTube</a>
+      </div>
+      <a href="https://donatello.to/sun99" class="support-donate" target="_blank">Donate / Subscribe ↗</a>
+      <div class="feedback-form">
+        <textarea class="feedback-input" placeholder="Bug report or feedback..." maxlength="500" rows="3"></textarea>
+        <div class="feedback-footer">
+          <span class="feedback-chars">0 / 500</span>
+          <button class="feedback-submit">Send</button>
+        </div>
+        <div class="feedback-status" style="display:none"></div>
+      </div>
+    </div>
+    <div id="tab-content" class="tab-content"></div>
+  </div>
+  <script type="module" src="panel.js"></script>
+</body>
+</html>

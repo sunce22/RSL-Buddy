@@ -1,0 +1,454 @@
+/* shared/styles.css */
+:root {
+  --bg:            #111318;
+  --bg-card:       #1e2028;
+  --bg-hover:      #282c38;
+  --bg-input:      #16181f;
+  --text:          #e8e8ea;
+  --text-muted:    #888;
+  --border:        #2a2d38;
+  --accent:        #e8e8ea;
+  --tab-active-bg: #e8e8ea;
+  --tab-active-fg: #111318;
+
+  --badge-legendary: #f0c040;
+  --badge-mythical:  #e040fb;
+  --badge-force:     #e05050;
+  --badge-magic:     #5080e8;
+  --badge-spirit:    #50c050;
+  --badge-void:      #a050e8;
+
+  --radius: 4px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+}
+
+.tab {
+  flex: 1;
+  padding: 10px 0;
+  min-height: 40px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: var(--font);
+  transition: color 0.15s;
+}
+
+.tab:hover { color: var(--text); }
+
+.tab--active {
+  color: var(--tab-active-fg);
+  background: var(--tab-active-bg);
+  font-weight: 600;
+}
+
+/* Language toggle */
+.lang-toggle {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding-right: 4px;
+}
+
+.lang-btn {
+  background: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font);
+  padding: 2px 5px;
+  color: var(--text-muted);
+  border-radius: var(--radius);
+  transition: color 0.15s, border-color 0.15s;
+  line-height: 1;
+}
+
+.lang-btn:hover { color: var(--text); border-color: var(--border); }
+.lang-btn--active { color: var(--text); border-color: var(--accent); cursor: default; }
+
+/* Skill navigation tabs */
+.skill-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-bottom: 8px;
+}
+
+.skill-tab {
+  font-size: 10px;
+  padding: 4px 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: var(--font);
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.skill-tab:hover { color: var(--text); border-color: var(--text-muted); }
+
+.skill-tab--active {
+  color: var(--text);
+  border-color: var(--accent);
+  background: var(--bg-hover);
+}
+
+/* Search */
+.search-input {
+  width: 100%;
+  padding: 7px 10px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 12px;
+  font-family: var(--font);
+  outline: none;
+}
+
+.search-input:focus { border-color: var(--accent); }
+.search-input::placeholder { color: var(--text-muted); }
+
+/* Hero list item */
+.hero-item {
+  padding: 8px 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  margin-bottom: 4px;
+  transition: background 0.1s;
+}
+
+.hero-item:hover { background: var(--bg-hover); }
+.hero-item--active { border-color: var(--accent); }
+
+.hero-item__body {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-thumb {
+  flex-shrink: 0;
+  width: 36px;
+  height: 47px;
+  object-fit: cover;
+  border-radius: 2px;
+  display: block;
+}
+
+.hero-item__text { flex: 1; min-width: 0; }
+
+.hero-item__name {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.hero-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 3px;
+}
+
+.hero-item__faction {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+/* Badges */
+.badge {
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.badge--legendary { color: var(--badge-legendary); border: 1px solid var(--badge-legendary); }
+.badge--mythical  { color: var(--badge-mythical);  border: 1px solid var(--badge-mythical); }
+.badge--force     { color: var(--badge-force);     border: 1px solid var(--badge-force); }
+.badge--magic     { color: var(--badge-magic);     border: 1px solid var(--badge-magic); }
+.badge--spirit    { color: var(--badge-spirit);    border: 1px solid var(--badge-spirit); }
+.badge--void      { color: var(--badge-void);      border: 1px solid var(--badge-void); }
+
+/* Hero detail (accordion) */
+.hero-detail {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 10px;
+  margin-bottom: 4px;
+}
+
+.hero-detail[hidden] { display: none; }
+
+/* Skill */
+.skill {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  margin-bottom: 5px;
+}
+
+.skill:last-child { margin-bottom: 0; }
+
+.skill__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.skill__name { font-weight: 600; font-size: 12px; }
+
+.skill__cooldown {
+  font-size: 10px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  margin-left: 6px;
+}
+
+.skill__description {
+  margin: 0 0 6px;
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.skill__effects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* Effect tags (clickable in hero card) */
+.effect-tag {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: var(--font);
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.effect-tag:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+/* Inline effect links inside skill descriptions */
+.effect-tag--inline {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.effect-tag--inline:hover { color: var(--text); border: none; }
+
+.mechanic-tag { color: var(--text-muted); }
+
+/* Effect mechanic description (shown when expanded) */
+.effect-description {
+  font-size: 11px;
+  color: var(--text);
+  font-style: italic;
+  padding: 4px 0 6px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+  line-height: 1.5;
+}
+
+/* Feedback form */
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  margin-top: 2px;
+}
+
+.feedback-input {
+  width: 100%;
+  padding: 6px 8px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 11px;
+  font-family: var(--font);
+  resize: none;
+  outline: none;
+  line-height: 1.4;
+}
+
+.feedback-input:focus { border-color: var(--accent); }
+.feedback-input::placeholder { color: var(--text-muted); }
+
+.feedback-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feedback-chars {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.feedback-submit {
+  padding: 4px 12px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 11px;
+  font-family: var(--font);
+  cursor: pointer;
+}
+
+.feedback-submit:hover { border-color: #555; }
+.feedback-submit:disabled { opacity: 0.5; cursor: default; }
+
+.feedback-status {
+  font-size: 11px;
+  text-align: right;
+}
+
+/* Effects list */
+.effect-item {
+  padding: 8px 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  margin-bottom: 4px;
+  transition: background 0.1s;
+}
+
+.effect-item:hover { background: var(--bg-hover); }
+.effect-item--active { border-color: var(--accent); }
+
+.effect-item__label { font-weight: 600; }
+
+.effect-item__count {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Effect entries (inside expanded effect) */
+.effect-entries {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 6px 10px;
+  margin-bottom: 4px;
+}
+
+.effect-entries[hidden] { display: none; }
+
+.effect-entry {
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.effect-entry:last-child { border-bottom: none; }
+
+.effect-entry__hero {
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font);
+}
+
+.effect-entry__hero:hover { color: var(--accent); }
+
+.effect-entry__skill {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Hero card header with portrait */
+.hero-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.hero-portrait {
+  flex-shrink: 0;
+  width: 72px;
+  height: 94px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  display: block;
+}
+
+.hero-card__info { flex: 1; min-width: 0; }
+
+/* Mythical form sections */
+.form-section { margin-bottom: 4px; }
+
+.form-section__label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--badge-mythical);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 6px 0 2px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+}

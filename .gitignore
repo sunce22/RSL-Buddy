@@ -1,0 +1,56 @@
+node_modules/
+.superpowers/
+*.zip
+
+# ── PRIVATE: project docs ──
+TODO.md
+ARCHITECTURE.md
+
+# ── PRIVATE: dev config, plans, guest feature, tests, translations ──
+
+# Claude dev workflow
+.claude/
+
+# Architecture plans and specs (roadmap/methodology)
+docs/superpowers/
+
+# OBS guest — PRO feature distinction
+obs/obs-guest.html
+obs/obs-guest.js
+obs/obs-guest.css
+
+# Tests — implementation details
+tests/
+
+# UI translations (competitive advantage)
+i18n/ui-uk.json
+
+# ── PRIVATE: data & tools (competitive advantage, not for public repo) ──
+
+# Hero data — scraped from game/fan sites, significant effort
+data/heroes.json
+data/skill-multipliers.json
+data/skill-multipliers.md
+
+# Translations — extracted from game memory, full UA pipeline result
+i18n/heroes-uk.json
+
+# Tools — extraction scripts and intermediate data
+tools/
+
+# Cloudflare Worker — contains Discord webhook integration logic
+cf-feedback-worker/
+
+# Portrait cache — scraped from third-party sites
+# (regenerable via /find-hero-portraits skill)
+
+# ── PRIVATE: local dev / generated artifacts ──
+
+# Large generated/binary tool files
+tools/il2cpp-dump/
+tools/Il2CppDumper/
+tools/apktool.jar
+tools/il2cpp-dump.zip
+
+# Playwright test artifacts
+.playwright-mcp/
