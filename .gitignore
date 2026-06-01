@@ -1,6 +1,7 @@
 node_modules/
 .superpowers/
 *.zip
+actions-runner/
 
 # ── PRIVATE: project docs ──
 TODO.md
