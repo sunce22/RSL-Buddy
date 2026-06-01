@@ -226,7 +226,7 @@ html, body {
   top: 52px;
   right: 20px;
   width: 320px;
-  max-height: calc(100vh - 20px);
+  max-height: calc(100vh - 72px);
   overflow-y: auto;
   background: rgba(17, 19, 24, 0.92);
   border: 1px solid var(--border);
