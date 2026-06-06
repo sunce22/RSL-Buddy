@@ -15,6 +15,11 @@ let overlayHero = null;
 let overlaySkillIdx = 0;
 let dismissTimer = null;
 let dismissCountdown = null;
+const DETECTOR_WS_PORT = 7182;
+const DETECTOR_WS_RECONNECT_BASE_MS = 1000;
+const DETECTOR_WS_RECONNECT_MAX_MS = 30000;
+let _detectorAutoShown = false;
+let _detectorReconnectDelay = DETECTOR_WS_RECONNECT_BASE_MS;
 
 function getDismissSeconds() {
   if (document.getElementById('obs-nolimit')?.checked) return 0;
@@ -23,6 +28,7 @@ function getDismissSeconds() {
 
 async function init() {
   heroes = await loadHeroes('../data/heroes.json');
+  connectDetector();
   effectsIndex = buildEffectsIndex(heroes);
   effectsList = buildEffectsList(effectsIndex);
   if (getLang() === 'uk') await loadTranslations();
@@ -164,6 +170,7 @@ function handleHeroListClick(e) {
   const hero = heroes.find(h => h.id === item.dataset.heroId);
   if (!hero) return;
   showHeroCard(hero);
+  _detectorAutoShown = false;
   closeControl();
 }
 
@@ -314,6 +321,47 @@ function dismissCard() {
   clearTimeout(dismissTimer);
   clearInterval(dismissCountdown);
   document.getElementById('card-overlay').classList.add('card-overlay--hidden');
+}
+
+function connectDetector() {
+  let ws;
+  try {
+    ws = new WebSocket(`ws://localhost:${DETECTOR_WS_PORT}`);
+  } catch {
+    scheduleDetectorReconnect();
+    return;
+  }
+
+  ws.onopen = () => {
+    _detectorReconnectDelay = DETECTOR_WS_RECONNECT_BASE_MS;
+  };
+
+  ws.onmessage = (event) => {
+    let msg;
+    try { msg = JSON.parse(event.data); } catch { return; }
+    if (msg.type !== 'hero') return;
+
+    if (msg.id) {
+      const hero = heroes.find(h => h.id === msg.id);
+      if (hero) {
+        showHeroCard(hero, 0);
+        _detectorAutoShown = true;
+      }
+    } else if (_detectorAutoShown) {
+      dismissCard();
+      _detectorAutoShown = false;
+    }
+  };
+
+  ws.onclose = () => scheduleDetectorReconnect();
+  ws.onerror = () => ws.close();
+}
+
+function scheduleDetectorReconnect() {
+  setTimeout(() => {
+    _detectorReconnectDelay = Math.min(_detectorReconnectDelay * 2, DETECTOR_WS_RECONNECT_MAX_MS);
+    connectDetector();
+  }, _detectorReconnectDelay);
 }
 
 init().catch(err => console.error('OBS init error:', err));
