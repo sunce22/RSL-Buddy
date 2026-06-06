@@ -324,13 +324,7 @@ function dismissCard() {
 }
 
 function connectDetector() {
-  let ws;
-  try {
-    ws = new WebSocket(`ws://localhost:${DETECTOR_WS_PORT}`);
-  } catch {
-    scheduleDetectorReconnect();
-    return;
-  }
+  const ws = new WebSocket(`ws://localhost:${DETECTOR_WS_PORT}`);
 
   ws.onopen = () => {
     _detectorReconnectDelay = DETECTOR_WS_RECONNECT_BASE_MS;
@@ -354,6 +348,7 @@ function connectDetector() {
   };
 
   ws.onclose = () => scheduleDetectorReconnect();
+  // onerror → close() → onclose → scheduleDetectorReconnect (single reconnect path)
   ws.onerror = () => ws.close();
 }
 
